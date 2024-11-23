@@ -12,9 +12,17 @@ function App() {
   const [image, setImage] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [program, setpProgram] = useState("");
+  const [program, setProgram] = useState("");
   const [graduationYear, setGraduationYear] = useState(2023);
   const [graduated, setGraduated] = useState(false);
+
+  const handleFullName = (event) => {setfullName(event.target.value)}
+  const handleImage = (event) => {setImage (event.target.value)}
+  const handlePhone = (event) => {setPhone (event.target.value)}
+  const handleEmail = (event) => {setEmail (event.target.value)}
+  const handleProgram = (event) => {setProgram (event.target.value)}
+  const handleGraduationYear = (event) => {setGraduationYear (event.target.value)}
+  const handleGraduated = (event) => {setGraduated (event.target.checked)}
 
 
   return (
@@ -25,41 +33,43 @@ function App() {
       <form>
         <span>Add a Student</span>
         <div>
+          {/* <p>{fullName}</p> */}
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input value={fullName} onChange={handleFullName} name="fullName" type="text" placeholder="Full Name" />
           </label>
-
+          {/* <p>{image}</p> */}
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input value={image} onChange={handleImage} name="image" type="url" placeholder="Profile Image" />
           </label>
-
+          {/* <p>{phone}</p> */}
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input value={phone} onChange={handlePhone}  name="phone" type="tel" placeholder="Phone" />
           </label>
-
+          {/* <p>{email}</p> */}
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input value={email} onChange={handleEmail}  name="email" type="email" placeholder="Email" />
           </label>
         </div>
 
         <div>
+        {/* <p>{program}</p> */}
           <label>
             Program
-            <select name="program">
+            <select              value={program} onChange={handleProgram}  name="program">
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
               <option value="Data">Data</option>
             </select>
           </label>
-
+          {/* <p>{graduationYear}</p> */}
           <label>
             Graduation Year
-            <input
+            <input value={graduationYear} onChange={handleGraduationYear} 
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -69,10 +79,10 @@ function App() {
               max={2030}
             />
           </label>
-
+          {/* <p>{graduated ? "yes" :"no"}</p> */}
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input checked={graduated} onChange={handleGraduated}  name="graduated" type="checkbox" />
           </label>
 
           <button type="submit">Add Student</button>
