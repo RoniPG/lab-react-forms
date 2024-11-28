@@ -11,26 +11,45 @@ function App() {
   const [fullName, setfullName] = useState("");
   const [image, setImage] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   const [program, setProgram] = useState("");
+  const [email, setEmail] = useState("");
   const [graduationYear, setGraduationYear] = useState(2023);
   const [graduated, setGraduated] = useState(false);
 
-  const handleFullName = (event) => {setfullName(event.target.value)}
-  const handleImage = (event) => {setImage (event.target.value)}
-  const handlePhone = (event) => {setPhone (event.target.value)}
-  const handleEmail = (event) => {setEmail (event.target.value)}
-  const handleProgram = (event) => {setProgram (event.target.value)}
-  const handleGraduationYear = (event) => {setGraduationYear (event.target.value)}
-  const handleGraduated = (event) => {setGraduated (event.target.checked)}
-
+  const handleFullName = (event) => { setfullName(event.target.value) }
+  const handleImage = (event) => { setImage(event.target.value) }
+  const handlePhone = (event) => { setPhone(event.target.value) }
+  const handleEmail = (event) => { setEmail(event.target.value) }
+  const handleProgram = (event) => { setProgram(event.target.value) }
+  const handleGraduationYear = (event) => { setGraduationYear(event.target.value) }
+  const handleGraduated = (event) => { setGraduated(event.target.checked) }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newStudent = {
+      fullName  : fullName,
+      phone: phone,
+      email: email,
+      program: program,
+      image: image,
+      graduationYear: graduationYear,
+      graduated: graduated
+    };
+    setStudents([newStudent, ...students]);
+    setfullName("");
+    setPhone("");
+    setEmail("");
+    setProgram("");
+    setImage("");
+    setGraduationYear(2023);
+    setGraduated(false);
+  }
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={() => handleSubmit(event)}>
         <span>Add a Student</span>
         <div>
           {/* <p>{fullName}</p> */}
@@ -46,20 +65,20 @@ function App() {
           {/* <p>{phone}</p> */}
           <label>
             Phone
-            <input value={phone} onChange={handlePhone}  name="phone" type="tel" placeholder="Phone" />
+            <input value={phone} onChange={handlePhone} name="phone" type="tel" placeholder="Phone" />
           </label>
-          {/* <p>{email}</p> */}
           <label>
+          {/* <p>{email}</p> */}
             Email
-            <input value={email} onChange={handleEmail}  name="email" type="email" placeholder="Email" />
           </label>
+            <input value={email} onChange={handleEmail} name="email" type="email" placeholder="Email" />
         </div>
 
         <div>
-        {/* <p>{program}</p> */}
+          {/* <p>{program}</p> */}
           <label>
             Program
-            <select              value={program} onChange={handleProgram}  name="program">
+            <select value={program} onChange={handleProgram} name="program">
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -69,7 +88,7 @@ function App() {
           {/* <p>{graduationYear}</p> */}
           <label>
             Graduation Year
-            <input value={graduationYear} onChange={handleGraduationYear} 
+            <input value={graduationYear} onChange={handleGraduationYear}
               name="graduationYear"
               type="number"
               placeholder="Graduation Year"
@@ -82,7 +101,7 @@ function App() {
           {/* <p>{graduated ? "yes" :"no"}</p> */}
           <label>
             Graduated
-            <input checked={graduated} onChange={handleGraduated}  name="graduated" type="checkbox" />
+            <input checked={graduated} onChange={handleGraduated} name="graduated" type="checkbox" />
           </label>
 
           <button type="submit">Add Student</button>
@@ -99,8 +118,9 @@ function App() {
       {/* STUDENT LIST */}
       {students &&
         students.map((student) => {
-          return <StudentCard key={student.email} {...student} />;
+          return <StudentCard key={student.email} {...student} />;  
         })}
+        
     </div>
   );
 }
